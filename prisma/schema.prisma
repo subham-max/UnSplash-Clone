@@ -1,0 +1,88 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id          String       @id @default(uuid())
+  name        String?
+  email       String       @unique
+  image       String?
+  bio         String?
+  photos      Photo[]
+  likes       Like[]
+  collections Collection[]
+  createdAt   DateTime     @default(now())
+}
+
+model Photo {
+  id          String       @id @default(uuid())
+  title       String
+  description String?
+  imageUrl    String
+  blurHash    String?
+  userId      String
+  user        User         @relation(fields: [userId], references: [id])
+
+  likes       Like[]
+  downloads   Int          @default(0)
+
+  tags        PhotoTag[]
+  collections CollectionPhoto[]
+
+  createdAt   DateTime     @default(now())
+
+  @@index([createdAt])
+}
+
+model Like {
+  id        String   @id @default(uuid())
+  userId    String
+  photoId   String
+  user      User     @relation(fields: [userId], references: [id])
+  photo     Photo    @relation(fields: [photoId], references: [id])
+  createdAt DateTime @default(now())
+
+  @@unique([userId, photoId])
+}
+
+model Tag {
+  id     String     @id @default(uuid())
+  name   String     @unique
+  photos PhotoTag[]
+}
+
+model PhotoTag {
+  id      String @id @default(uuid())
+  photoId String
+  tagId   String
+
+  photo   Photo  @relation(fields: [photoId], references: [id])
+  tag     Tag    @relation(fields: [tagId], references: [id])
+
+  @@unique([photoId, tagId])
+}
+
+model Collection {
+  id        String            @id @default(uuid())
+  name      String
+  userId    String
+  user      User              @relation(fields: [userId], references: [id])
+  photos    CollectionPhoto[]
+  createdAt DateTime          @default(now())
+}
+
+model CollectionPhoto {
+  id           String @id @default(uuid())
+  collectionId String
+  photoId      String
+
+  collection   Collection @relation(fields: [collectionId], references: [id])
+  photo        Photo      @relation(fields: [photoId], references: [id])
+
+  @@unique([collectionId, photoId])
+}
