@@ -1,0 +1,10 @@
+2026-03-17T19:09:30.520Z - Auth attempt for: test@example.com
+2026-03-17T19:09:41.583Z - Auth attempt for: test@example.com
+2026-03-17T19:12:56.278Z - --- AUTH ATTEMPT START ---
+2026-03-17T19:12:56.281Z - Email: test@example.com
+2026-03-17T19:12:56.282Z - Password length: 11
+2026-03-17T19:12:56.283Z - Querying database for user...
+2026-03-17T19:12:58.918Z - User record found: YES
+2026-03-17T19:12:58.919Z - Comparing passwords...
+2026-03-17T19:12:59.934Z - Password match: true
+2026-03-17T19:12:59.938Z - Result: SUCCESS (User authenticated)
