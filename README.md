@@ -34,3 +34,41 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
+
+
+-------------------------------------------------------------------------------------
+
+Codebase Overview: Unsplash Clone
+This project is a modern, full-stack Unsplash Clone built with the latest web technologies. It provides a platform for users to upload, discover, and organize high-quality photos.
+
+🚀 Tech Stack
+Framework: Next.js 15+ (App Router)
+Language: TypeScript
+Database: Prisma with Neon PostgreSQL
+Authentication: Next Auth
+Styling: Tailwind CSS 4
+Image Storage: Cloudinary (Integration for cloud-based image handling)
+📂 Core Structure
+/src/app: Contains the application routes and UI.
+page.tsx: The main gallery feed.
+/upload: Logic for uploading new photos.
+/api: Server-side endpoints (e.g., handling uploads).
+/prisma: Defines the database schema and migrations.
+/public: Static assets.
+📊 Data Model
+The application uses a robust relational database schema:
+
+Model	Description
+User	Stores profile info, likes, and collections.
+Photo	Main entity with title, image URL, and metadata like blurHash.
+Collection	Allows users to group photos together.
+Tag	For categorizing and searching photos.
+Like	Tracks interactions between users and photos.
+✨ Main Features
+Photo Feed: Displays a responsive grid of the latest uploaded photos on the home page.
+Image Uploads: Users can upload photos via a dedicated interface that integrates with Cloudinary.
+Authentication: Secure user login/signup using Next Auth.
+Social Interactions: Support for liking photos and managing collections.
+SEO & Performance: Optimized image loading and semantic HTML structure.

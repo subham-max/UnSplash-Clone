@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import fs from "fs/promises";
 import path from "path";
 
+import prisma from "@/app/lib/prisma";
+
 export async function POST(req: Request) {
   try {
     const data = await req.formData();
@@ -21,6 +23,14 @@ export async function POST(req: Request) {
     const filePath = path.join(uploadDir, file.name);
 
     await fs.writeFile(filePath, buffer);
+
+    const photo = await prisma.photo.create({
+  data: {
+    title: file.name,
+    imageUrl: `/uploads/${file.name}`,
+    userId: "PASTE_USER_ID_HERE"
+  }
+});
 
     return NextResponse.json({
       message: "Upload successful",
