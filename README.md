@@ -72,3 +72,70 @@ Image Uploads: Users can upload photos via a dedicated interface that integrates
 Authentication: Secure user login/signup using Next Auth.
 Social Interactions: Support for liking photos and managing collections.
 SEO & Performance: Optimized image loading and semantic HTML structure.
+
+
+-------------------------------------------
+
+UnSplash-Clone Codebase Analysis
+This project is a full-stack web application designed to clone the core functionality of Unsplash. It allows users to view, upload, and manage high-quality photos.
+
+🛠️ Technology Stack
+Framework: Next.js (App Router) - Provides both the frontend pages and backend API routes.
+Database: PostgreSQL (via Neon) - A serverless database for storing user data, photo metadata, and relationships.
+ORM: Prisma - Used to interact with the database using TypeScript types.
+Authentication: Next-Auth - Handles secure login using email/password (Credentials provider).
+Storage: Cloudinary - Used for hosting and optimizing uploaded images.
+Styling: Tailwind CSS - For modern, responsive UI design.
+🏗️ Core Architecture & Process Flow
+The application follows the modern Next.js architecture where the frontend and backend are tightly integrated.
+
+1. Photo Discovery (The Homepage)
+File: 
+src/app/page.tsx
+Flow:
+When you visit the homepage (/), the server executes 
+page.tsx
+.
+It uses Prisma to fetch all photos from the database, ordered by creation date.
+The photos are rendered in a responsive grid layout.
+2. Authentication (Login)
+Configuration: 
+src/app/lib/auth.ts
+Flow:
+User enters credentials on the /login page.
+Next-Auth sends these to the 
+authorize
+ callback in 
+auth.ts
+.
+The system searches for the user in the database via Prisma and compares the hashed password using bcrypt.
+If valid, a secure JWT session is created and stored in a cookie.
+3. Image Upload (The "Creator" Flow)
+UI Page: 
+src/app/upload/page.tsx
+API Route: 
+src/app/api/upload/route.ts
+Flow:
+User selects a file and enters a title in the upload form.
+The form sends a multipart/form-data POST request to /api/upload.
+The server verifies the user's session (must be logged in).
+The file is streamed to Cloudinary.
+Cloudinary returns a secure URL for the image.
+Prisma saves a new Photo record in the database with the Cloudinary URL and the userId.
+🗄️ Database Models (Prisma)
+The 
+schema.prisma
+ defines how your data is structured:
+
+User: Stores email, hashed password, name, and bio.
+Photo: Stores title, imageUrl (from Cloudinary), and links to the User who uploaded it.
+Like / Collection / Tag: Infrastructure is ready for social features like liking photos, organizing them into collections, and tagging them for search.
+🚦 Current Status & "Hidden" Logic
+Registration: There is currently no public registration page. Users are created using a maintenance script: 
+create-test-user.js
+.
+Debugging: The project has detailed logging in 
+upload-debug.txt
+ and 
+auth-debug.txt
+ to help track any issues with Cloudinary or Authentication.

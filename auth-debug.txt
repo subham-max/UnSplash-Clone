@@ -8,3 +8,17 @@
 2026-03-17T19:12:58.919Z - Comparing passwords...
 2026-03-17T19:12:59.934Z - Password match: true
 2026-03-17T19:12:59.938Z - Result: SUCCESS (User authenticated)
+2026-03-17T19:54:39.623Z - --- AUTH ATTEMPT START ---
+2026-03-17T19:54:39.626Z - Email: subhampaul011@gmail.com
+2026-03-17T19:54:39.627Z - Password length: 8
+2026-03-17T19:54:39.629Z - Querying database for user...
+2026-03-17T19:54:41.119Z - User record found: NO
+2026-03-17T19:54:41.120Z - Result: FAILED (User not found)
+2026-03-17T19:57:05.812Z - --- AUTH ATTEMPT START ---
+2026-03-17T19:57:05.815Z - Email: test@example.com
+2026-03-17T19:57:05.816Z - Password length: 11
+2026-03-17T19:57:05.820Z - Querying database for user...
+2026-03-17T19:57:07.001Z - User record found: YES
+2026-03-17T19:57:07.002Z - Comparing passwords...
+2026-03-17T19:57:07.746Z - Password match: true
+2026-03-17T19:57:07.747Z - Result: SUCCESS (User authenticated)
